@@ -1,0 +1,51 @@
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: app_connect_people
+        container_name: app_connect_people_app
+        restart: unless-stopped
+        ports:
+            - '${APP_PORT:-8000}:8000'
+        environment:
+            APP_ENV: '${APP_ENV}'
+            APP_DEBUG: '${APP_DEBUG}'
+            APP_KEY: '${APP_KEY}'
+            APP_URL: '${APP_URL}'
+            DB_CONNECTION: '${DB_CONNECTION}'
+            DB_HOST: mysql
+            DB_PORT: '${DB_PORT}'
+            DB_DATABASE: '${DB_DATABASE}'
+            DB_USERNAME: '${DB_USERNAME}'
+            DB_PASSWORD: '${DB_PASSWORD}'
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - sail
+        depends_on:
+            - mysql
+    mysql:
+        image: 'mysql:8.0'
+        container_name: app_connect_people_mysql
+        restart: unless-stopped
+        ports:
+            - '${FORWARD_DB_PORT:-33066}:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+        volumes:
+            - 'mysql-data:/var/lib/mysql'
+        networks:
+            - sail
+        healthcheck:
+            test: ['CMD', 'mysqladmin', 'ping', '-p${DB_PASSWORD}']
+            retries: 3
+            timeout: 5s
+            interval: 10s
+networks:
+    sail:
+        driver: bridge
+volumes:
+    mysql-data:
+        driver: local
