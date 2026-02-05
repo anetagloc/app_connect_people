@@ -1,0 +1,34 @@
+services:
+  # Web Service - Laravel Application
+  - type: web
+    name: app-connect-people
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: APP_NAME
+        value: "App Connect People"
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        generateValue: true
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: SESSION_DRIVER
+        value: cookie
+      - key: CACHE_STORE
+        value: file
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: DATABASE_URL
+        fromDatabase:
+          name: app-connect-people-db
+          property: connectionString
+
+databases:
+  # PostgreSQL Database (free tier)
+  - name: app-connect-people-db
+    plan: free
+    databaseName: app_connect_people
