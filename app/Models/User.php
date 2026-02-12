@@ -13,13 +13,27 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
+     * Kolumna create_time zamiast domyślnego created_at (zgodnie ze schematem).
+     */
+    const CREATED_AT = 'create_time';
+    const UPDATED_AT = null;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
+        'password',
+        'location_id',
+        'age',
+        'description',
+        'event_id',
+        'activity_id',
+        'avaible_time_id',
+        'gender',
     ];
 
     /**
@@ -42,6 +56,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'create_time' => 'datetime',
         ];
     }
 }
