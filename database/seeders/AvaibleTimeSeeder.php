@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\AvaibleTime;
 use Illuminate\Database\Seeder;
 
 class AvaibleTimeSeeder extends Seeder
@@ -12,6 +12,11 @@ class AvaibleTimeSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        // Godziny od 0:00 do 24:00 (co godzinę = 25 rekordów)
+        for ($hour = 0; $hour <= 24; $hour++) {
+            AvaibleTime::create([
+                'name' => sprintf('%02d:00', $hour),
+            ]);
+        }
     }
 }

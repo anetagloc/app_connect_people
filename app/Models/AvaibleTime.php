@@ -9,4 +9,8 @@ class AvaibleTime extends Model
 {
     /** @use HasFactory<\Database\Factories\AvaibleTimeFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+    ];
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AvaibleTime;
 use App\Http\Requests\StoreAvaibleTimeRequest;
 use App\Http\Requests\UpdateAvaibleTimeRequest;
+use App\Http\Resources\AvaibleTimeResource;
 
 class AvaibleTimeController extends Controller
 {
@@ -14,7 +15,7 @@ class AvaibleTimeController extends Controller
      */
     public function index()
     {
-        //
+        return AvaibleTimeResource::collection(AvaibleTime::all());
     }
 
     /**

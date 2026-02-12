@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\SuggestedActivity;
 use App\Http\Requests\StoreSuggestedActivityRequest;
 use App\Http\Requests\UpdateSuggestedActivityRequest;
+use App\Http\Resources\SuggestedActivityResource;
 
 class SuggestedActivityController extends Controller
 {
@@ -14,7 +15,7 @@ class SuggestedActivityController extends Controller
      */
     public function index()
     {
-        //
+        return SuggestedActivityResource::collection(SuggestedActivity::all());
     }
 
     /**

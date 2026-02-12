@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Http\Requests\StoreActivityRequest;
 use App\Http\Requests\UpdateActivityRequest;
+use App\Http\Resources\ActivityResource;
 
 class ActivityController extends Controller
 {
@@ -14,7 +15,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        //
+        return ActivityResource::collection(Activity::all());
     }
 
     /**

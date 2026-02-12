@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Activity;
+use App\Models\AvaibleTime;
+use App\Models\Event;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -24,10 +27,18 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'username' => fake()->unique()->userName(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'create_time' => fake()->dateTimeBetween('-1 year', 'now'),
+            'location_id' => fake()->numberBetween(1, 100),
+            'age' => (string) fake()->numberBetween(18, 65),
+            'description' => fake()->sentence(4),
+            'event_id' => fn () => Event::inRandomOrder()->value('id'),
+            'activity_id' => fn () => Activity::inRandomOrder()->value('id'),
+            'avaible_time_id' => fn () => AvaibleTime::inRandomOrder()->value('id'),
+            'gender' => fake()->randomElement(['male', 'female', 'other']),
+            'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ];
     }
