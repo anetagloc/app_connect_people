@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id(); 
-            $table->string('name', 45);
+            $table->string('name', 100);
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
-            $table->string('activity_goal', 45)->nullable();
-            $table->string('max_assign_person', 45)->nullable();
+            $table->string('activity_goal', 100)->nullable();
+            $table->string('max_assign_person', 100)->nullable();
             $table->timestamps();
         });
     }

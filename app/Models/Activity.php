@@ -9,4 +9,11 @@ class Activity extends Model
 {
     /** @use HasFactory<\Database\Factories\ActivityFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'category_id',
+        'activity_goal',
+        'max_assign_person',
+    ];
 }

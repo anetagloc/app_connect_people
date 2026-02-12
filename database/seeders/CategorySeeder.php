@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
@@ -12,6 +12,19 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $categories = [
+            'Sport & Aktywność fizyczna',
+            'Gry & Rozrywka',
+            'Kultura & Sztuka',
+            'Kulinarne',
+            'Fotografia & Twórcze hobby',
+            'Podróże & Outdoor',
+            'Lifestyle & Wellbeing',
+            'Społeczność i lokalne inicjatywy',
+        ];
+
+        foreach ($categories as $name) {
+            Category::create(['name' => $name]);
+        }
     }
 }
