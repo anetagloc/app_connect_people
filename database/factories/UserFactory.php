@@ -27,13 +27,13 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'username' => fake()->unique()->userName(),
+            'username' => substr(fake()->unique()->userName(), 0, 16),
             'email' => fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
             'create_time' => fake()->dateTimeBetween('-1 year', 'now'),
             'location_id' => fake()->numberBetween(1, 100),
             'age' => (string) fake()->numberBetween(18, 65),
-            'description' => fake()->sentence(4),
+            'description' => substr(fake()->sentence(3), 0, 45),
             'event_id' => fn () => Event::inRandomOrder()->value('id'),
             'activity_id' => fn () => Activity::inRandomOrder()->value('id'),
             'avaible_time_id' => fn () => AvaibleTime::inRandomOrder()->value('id'),
