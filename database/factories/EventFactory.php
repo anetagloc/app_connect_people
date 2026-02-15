@@ -64,6 +64,7 @@ class EventFactory extends Factory
             'name' => fake()->randomElement($eventNames),
             'location' => fake()->randomElement($cities),
             'date' => fake()->dateTimeBetween('now', '+6 months')->format('Y-m-d'),
+            'max_participants' => fake()->numberBetween(2, 50),
         ];
     }
 }
