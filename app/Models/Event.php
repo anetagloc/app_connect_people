@@ -14,5 +14,6 @@ class Event extends Model
         'name',
         'location',
         'date',
+        'max_participants',
     ];
 }

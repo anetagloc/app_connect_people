@@ -12,6 +12,10 @@ if [ -n "$DATABASE_URL" ]; then
     php artisan migrate --force
 fi
 
+# Generate Swagger documentation
+echo "📝 Generating Swagger API docs..."
+php artisan l5-swagger:generate
+
 # Cache configuration for production
 echo "⚡ Optimizing for production..."
 php artisan config:cache
