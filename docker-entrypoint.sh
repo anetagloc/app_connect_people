@@ -8,8 +8,8 @@ if [ -n "$DATABASE_URL" ]; then
     echo "📦 Detected DATABASE_URL, using PostgreSQL..."
     export DB_CONNECTION=pgsql
     
-    echo "📦 Running database migrations..."
-    php artisan migrate --force
+    echo "📦 Running database migrations with fresh seed..."
+    php artisan migrate:fresh --seed --force
 fi
 
 # Generate Swagger documentation
